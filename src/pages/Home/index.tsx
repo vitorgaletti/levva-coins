@@ -14,10 +14,12 @@ export function Home() {
       <TransactionsContainer>
         <TransactionsTable>
           <thead>
-            <td>Descrição</td>
-            <td>Preço</td>
-            <td>Categoria</td>
-            <td>Data</td>
+            <tr>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Categoria</th>
+              <th>Data</th>
+            </tr>
           </thead>
           <tbody>
             <tr>

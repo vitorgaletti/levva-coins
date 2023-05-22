@@ -1,11 +1,8 @@
 import styled, { css } from 'styled-components';
 
-export const HeaderContainer = styled.header`
-  padding: 2.5rem 0 7.5rem;
-  display: grid;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  grid-template-columns: 1fr 70rem 7rem 1fr;
+export const HeaderContainer = styled.div`
+  height: 212px;
+
   border-bottom: 1px solid ${props => props.theme['yellow-500']}30;
   background: linear-gradient(
     to bottom,
@@ -13,16 +10,24 @@ export const HeaderContainer = styled.header`
     ${props => props.theme['gray-600']}
   );
 `;
-export const HeaderContent = styled.div`
-  width: 100%;
-  max-width: 70rem;
 
-  grid-column: 2;
+export const HeaderContent = styled.header`
+  max-width: 1120px;
+  padding-top: 2.5rem;
+  margin: 0 auto;
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
+  @media only screen and (min-width: 1440px) {
+    position: relative;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    max-width: 1024px;
+  }
 `;
+
 export const NewCategoryButton = styled.button`
   height: 50px;
   padding: 0 1.25rem;
@@ -46,7 +51,6 @@ export const NewCategoryButton = styled.button`
 export const NewTransactionButton = styled.button`
   height: 50px;
   padding: 0 1.25rem;
-  margin-right: 1rem;
 
   background-color: ${props => props.theme['yellow-300']};
   border: 0;
@@ -67,16 +71,18 @@ interface UserAvatarProps {
 }
 
 export const UserAvatar = styled.img<UserAvatarProps>`
-  width: 3.5rem;
-  height: 3.5rem;
-
-  grid-column: 3 /4;
-  display: flex;
-  justify-self: flex-end;
+  width: 3.1rem;
+  height: 100%;
+  right: -6rem;
 
   border-radius: 50%;
   border: 2px solid transparent;
   box-shadow: 0px 0px 10px 10px #00000010;
+
+  @media only screen and (min-width: 1440px) {
+    position: absolute;
+    height: auto;
+  }
 
   transition: all 0.3;
 

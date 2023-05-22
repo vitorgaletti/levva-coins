@@ -3,14 +3,14 @@ import styled, { css } from 'styled-components';
 export const SummaryContainer = styled.section`
   width: 100%;
   max-width: 1120px;
-  margin: 0 auto;
-  margin-top: -5rem;
-  padding: 0 1.5rem;
+  margin: -5rem auto 4rem;
 
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 1rem;
-  grid-column: 2 / 3;
+
+  @media only screen and (max-width: 1440px) {
+    max-width: 1024px;
+  }
 `;
 
 interface SummaryCardProps {
@@ -18,6 +18,9 @@ interface SummaryCardProps {
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
+  flex: 1;
+  height: 140px;
+
   background-color: ${props => props.theme['gray-500']};
   border-radius: 6px;
   padding: 2rem;
@@ -33,6 +36,10 @@ export const SummaryCard = styled.div<SummaryCardProps>`
     display: block;
     margin-top: 1rem;
     font-size: 2rem;
+
+    @media only screen and (max-width: 1440px) {
+      font-size: 1.7rem;
+    }
   }
 
   ${props =>
