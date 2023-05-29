@@ -120,7 +120,7 @@
       "responses": [
         {
           "uuid": "63947b81-6103-4847-af1c-2583bc28eb2a",
-          "body": "{\r\n  \"id\": \"47f853e0-092e-44f0-827e-60f3bea3e876\",\r\n  \"name\": \"Jhon Doe\",\r\n  \"email\": \"jhon.doe@levva.io\",\r\n  \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huLmRvZUBsZXZ2YS5pbyIsImlhdCI6MTUxNjIzOTAyMn0.30Jmzb4GvabsH8UWOvSKyfaqSAknLG9SqxPn8kpWWtQ\"\r\n}",
+          "body": "{\r\n  \"id\": \"47f853e0-092e-44f0-827e-60f3bea3e876\",\r\n  \"name\": \"Jhon Doe\",\r\n  \"email\": \"jhon.doe@levva.io\",\r\n  \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiI0N2Y4NTNlMC0wOTJlLTQ0ZjAtODI3ZS02MGYzYmVhM2U4NzYiLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG4uZG9lQGxldnZhLmlvIiwiaWF0IjoxNTE2MjM5MDIyfQ.ujhlw2Qy5JezElP2ldAjuvDL6IbVHWiVllNam_-brBE\"\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "User authenticated",

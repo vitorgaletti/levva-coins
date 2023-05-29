@@ -4,6 +4,7 @@ import * as yup from 'yup';
 
 import { AuthLayout } from '../../layouts/AuthLayout';
 import { Form, FormButton, FormError, FormInput } from '../../styles/global';
+import Api from '../../clients/api/Api';
 
 interface FormProps {
   email: string;
@@ -28,7 +29,7 @@ export function Login() {
   });
 
   function handleLogin({ email, password }: FormProps) {
-    console.log({ email, password });
+    Api.post;
   }
 
   return (
