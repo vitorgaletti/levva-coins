@@ -101,3 +101,22 @@ export const UserAvatar = styled.img<UserAvatarProps>`
           }
         `}
 `;
+
+export const SignOutButton = styled.button`
+  width: 100%;
+  padding: 1rem 0;
+  margin-top: 1.5rem;
+
+  background: ${props => props.theme['gray-600']};
+  color: ${props => props.theme['white']};
+  border-radius: 6px;
+  border: 1px solid ${props => props.theme['yellow-300']};
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    background: ${props => props.theme['yellow-500']};
+    border: 1px solid ${props => props.theme['yellow-500']};
+    color: ${props => props.theme['black']};
+  }
+`;

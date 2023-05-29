@@ -1,3 +1,4 @@
+import { router } from '../../Router';
 import { LoginParams, LoginValues } from '../../domain/login';
 import { RequestError } from '../../domain/request';
 import { LoginService } from '../../services/LoginService/LoginService';
@@ -12,9 +13,11 @@ const execute = async ({ email, password }: LoginParams): Promise<void> => {
 
   return LoginService.authenticateUser({ email, password })
     .then((user: LoginValues) => {
-      window.localStorage.setItem('token', JSON.stringify(user));
+      window.localStorage.setItem('user', JSON.stringify(user));
 
       loadLoginDone();
+
+      router.navigate('/home');
     })
     .catch(errorCallback);
 };
