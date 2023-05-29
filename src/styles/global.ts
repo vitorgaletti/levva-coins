@@ -29,7 +29,7 @@ export const Form = styled.form`
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
 `;
 
 export const FormInput = styled.input`
@@ -43,6 +43,11 @@ export const FormInput = styled.input`
   & + & {
     margin-top: 1rem;
   }
+`;
+
+export const FormError = styled.span`
+  color: ${props => props.theme['red-500']};
+  margin: 0.5rem 0 1rem;
 `;
 
 export const FormButton = styled.button`
