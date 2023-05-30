@@ -44,7 +44,7 @@
     {
       "uuid": "c6dd1c5c-1a65-42fd-be16-0b75128f3c38",
       "name": "Transactions",
-      "collapsed": true,
+      "collapsed": false,
       "children": [
         {
           "type": "route",
@@ -509,7 +509,7 @@
       "responses": [
         {
           "uuid": "7b515fc3-f7b1-4dbe-bb1c-d7cfe0435cba",
-          "body": "[\r\n{{#repeat 5 10}} \r\n {\r\n    \"id\": \"{{guid}}\",\r\n    \"description\": \"{{faker 'commerce.productName'}}\",\r\n    \"amount\": {{toFixed (float 10.00 100.00) 2}},\r\n    \"type\": \"{{oneOf (array 'deposit' 'credit')}}\",\r\n    \"categoryId\": {\r\n      \"id\": \"{{guid}}\",\r\n      \"description\": \"{{faker 'commerce.department'}}\"\r\n    }\r\n  }\r\n{{/repeat}}  \r\n\r\n]\r\n \r\n",
+          "body": "[\r\n{{#repeat 5 10}} \r\n {\r\n    \"id\": \"{{guid}}\",\r\n    \"description\": \"{{faker 'commerce.productName'}}\",\r\n    \"amount\": {{toFixed (float 10.00 100.00) 2}},\r\n    \"type\": {{oneOf (array 0 1)}},\r\n    \"categoryId\": {\r\n      \"id\": \"{{guid}}\",\r\n      \"description\": \"{{faker 'commerce.department'}}\"\r\n    }\r\n  }\r\n{{/repeat}}  \r\n\r\n]\r\n \r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "List all transactions",
