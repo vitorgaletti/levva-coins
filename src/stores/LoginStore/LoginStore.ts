@@ -1,4 +1,4 @@
-import { createStore } from 'effector/effector.mjs';
+import { createStore } from 'effector';
 import { LoginState } from './LoginState';
 import { loadLogin, loadLoginDone, loadLoginFail } from './LoginEvents';
 
