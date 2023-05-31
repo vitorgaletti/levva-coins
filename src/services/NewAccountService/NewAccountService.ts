@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import Api from '../../clients/api/Api';
-import { NewAccountParams } from '../../domain/newAccount';
-import { RequestError } from '../../domain/request';
+import { NewAccountParams } from '../../domains/newAccount';
+import { RequestError } from '../../domains/request';
 
 const createUser = async ({
   name,
