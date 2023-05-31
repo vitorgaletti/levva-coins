@@ -19,8 +19,7 @@ const NewAccountStore = createStore<NewAccountState>(initialState)
     hasError: false,
     errorMessage: '',
   }))
-  .on(loadNewAccountDone, state => ({
-    ...state,
+  .on(loadNewAccountDone, () => ({
     isLoading: false,
     hasError: false,
     errorMessage: '',
