@@ -102,7 +102,7 @@ export function TransactionModal() {
 
         <TransactionTypeContainer
           {...register('type')}
-          onChange={event => setValue('type', event.target.value)}
+          onChange={event => setValue('type', (event.target as HTMLButtonElement).value)}
         >
           <TransactionTypeButton variant="income" value="income">
             <ArrowCircleUp size={24} />
