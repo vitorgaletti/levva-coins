@@ -29,7 +29,7 @@
     {
       "uuid": "2405692c-3fc7-4662-8640-c05f453f4b0f",
       "name": "Categories",
-      "collapsed": true,
+      "collapsed": false,
       "children": [
         {
           "type": "route",
