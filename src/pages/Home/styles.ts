@@ -51,6 +51,16 @@ export const TransactionsTable = styled.table`
   }
 `;
 
+export const TransactionsTableEmpty = styled.div`
+  width: 100%;
+  height: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+`;
 interface PriceHighLightProps {
   variant?: 'income' | 'outcome';
 }

@@ -1,31 +1,16 @@
 import { ReactNode } from 'react';
 
-import {
-  HeaderContainer,
-  HeaderContent,
-  NewTransactionButton,
-  SignOutButton,
-  UserAvatar,
-} from './styles';
+import { HeaderContainer, HeaderContent, SignOutButton, UserAvatar } from './styles';
 
 import levvaCoinsLogo from '../../assets/logo.svg';
+import { Form, FormButton, FormInput } from '../../styles/global';
 import { Modal } from '../Modal';
-import {
-  Form,
-  FormButton,
-  FormInput,
-  TransactionTypeButton,
-  TransactionTypeContainer,
-} from '../../styles/global';
-import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react';
+
 import { router } from '../../Router';
 import { CategoryModal } from './CategoryModal';
 import { TransactionModal } from './TransactionModal';
 
 export function Header() {
-  const newTransactionButton: ReactNode = (
-    <NewTransactionButton>Nova Transação</NewTransactionButton>
-  );
   const userAvatar: ReactNode = <UserAvatar src="https://github.com/jemluz.png" alt="Jemima Luz" />;
 
   function handleSignOut() {
