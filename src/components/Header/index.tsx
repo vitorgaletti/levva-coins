@@ -20,6 +20,7 @@ import {
 import { ArrowCircleDown, ArrowCircleUp } from 'phosphor-react';
 import { router } from '../../Router';
 import { CategoryModal } from './CategoryModal';
+import { TransactionModal } from './TransactionModal';
 
 export function Header() {
   const newTransactionButton: ReactNode = (
@@ -40,27 +41,7 @@ export function Header() {
         <div>
           <CategoryModal />
 
-          <Modal title="Nova transação" trigger={newTransactionButton}>
-            <Form>
-              <FormInput type="text" placeholder="Descrição" required />
-              <FormInput type="number" placeholder="Preço" required />
-              <FormInput type="text" placeholder="Categoria" required />
-
-              <TransactionTypeContainer>
-                <TransactionTypeButton variant="income" value="income">
-                  <ArrowCircleUp size={24} />
-                  Entrada
-                </TransactionTypeButton>
-
-                <TransactionTypeButton variant="outcome" value="outcome">
-                  <ArrowCircleDown size={24} />
-                  Saída
-                </TransactionTypeButton>
-              </TransactionTypeContainer>
-
-              <FormButton type="submit">Cadastrar</FormButton>
-            </Form>
-          </Modal>
+          <TransactionModal />
         </div>
 
         <Modal title="Meu perfil" trigger={userAvatar}>
