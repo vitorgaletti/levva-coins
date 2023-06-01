@@ -22,7 +22,10 @@ const formSchema = yup
     name: yup.string().required('O nome é obrigatório'),
     email: yup.string().email('Digite um e-mail válido').required('O e-mail é obrigatório'),
     password: yup.string().required('A senha é obrigatória'),
-    confirmPassword: yup.string().required('A confirmação de senha é obrigatória'),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password')], 'As senhas não batem')
+      .required('A confirmação de senha é obrigatória'),
   })
   .required();
 

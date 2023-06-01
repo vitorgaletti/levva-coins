@@ -1,4 +1,4 @@
-import { LoginValues } from '../domain/login';
+import { LoginValues } from '../domains/login';
 
 import jwt from 'jsonwebtoken';
 

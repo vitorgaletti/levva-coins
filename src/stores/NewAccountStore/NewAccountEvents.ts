@@ -1,5 +1,5 @@
 import { createEvent } from 'effector';
-import { RequestError } from '../../domain/request';
+import { RequestError } from '../../domains/request';
 
 export const loadNewAccount = createEvent('loadNewAccount');
 export const loadNewAccountDone = createEvent('loadNewAccountDone');
