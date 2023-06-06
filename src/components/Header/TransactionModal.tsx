@@ -31,7 +31,10 @@ interface FormProps {
 const formSchema = yup
   .object({
     description: yup.string().required('O nome da transação é obrigatória'),
-    amount: yup.number().required('O valor da transação é obrigatória'),
+    amount: yup
+      .number()
+      .typeError('O valor precisa de um número')
+      .required('O valor da transação é obrigatória'),
     type: yup.string().oneOf(['income', 'outcome']).required('O tipo da transação é obrigatória'),
     categoryId: yup.string().required('A categoria da transação é obrigatória'),
   })
@@ -51,6 +54,7 @@ export function TransactionModal() {
     formState: { errors },
   } = useForm<FormProps>({
     resolver: yupResolver(formSchema),
+    mode: 'onBlur',
   });
 
   useEffect(() => {
@@ -88,8 +92,8 @@ export function TransactionModal() {
         />
         {errors.amount && <FormError>{errors.amount.message}</FormError>}
 
-        <FormSelect {...register('categoryId')} defaultValue={'Categoria'}>
-          <option value="Categoria" disabled hidden>
+        <FormSelect {...register('categoryId')} defaultValue="">
+          <option value="" disabled hidden>
             Categoria
           </option>
           {categories.map(category => (

@@ -1,7 +1,8 @@
 import { useStore } from 'effector-react';
-import { useEffect } from 'react';
-import GetTransactionsUseCase from '../../useCases/GetTransactionsUseCase/GetTransactionsUseCase';
+import { useCallback, useEffect, useState } from 'react';
 
+import { TransactionValues } from '../../domains/transaction';
+import GetTransactionsUseCase from '../../useCases/GetTransactionsUseCase/GetTransactionsUseCase';
 import TransactionStore from '../../stores/TransactionStore/TransactionStore';
 
 import { Header } from '../../components/Header';
@@ -19,21 +20,38 @@ import {
 export function Home() {
   const { isLoading, hasError, errorMessage, transactions } = useStore(TransactionStore);
 
+  const [searchTransactions, setSearchTransactions] = useState<TransactionValues[]>([]);
+
   const money = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   });
 
+  const handleSearch = useCallback(
+    (search: string) => {
+      const searchRegex = new RegExp(search, 'i');
+      const searchResult = transactions.filter(transaction =>
+        searchRegex.test(transaction.description),
+      );
+      setSearchTransactions(searchResult);
+    },
+    [transactions],
+  );
+
   useEffect(() => {
     GetTransactionsUseCase.execute();
   }, []);
+
+  useEffect(() => {
+    setSearchTransactions(transactions);
+  }, [transactions]);
 
   return (
     <HomeWrapper>
       <Header />
       <Summary />
 
-      <SearchForm />
+      <SearchForm handleSearchForm={handleSearch} />
 
       <TransactionsContainer>
         <TransactionsTable>
@@ -46,8 +64,8 @@ export function Home() {
             </tr>
           </thead>
           <tbody>
-            {transactions.length > 0 &&
-              transactions.map(transaction => (
+            {searchTransactions.length > 0 &&
+              searchTransactions.map(transaction => (
                 <tr key={transaction.id}>
                   <td width="50%">{transaction.description}</td>
                   <td>
