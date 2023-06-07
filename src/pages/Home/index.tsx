@@ -21,6 +21,7 @@ export function Home() {
   const { isLoading, hasError, errorMessage, transactions } = useStore(TransactionStore);
 
   const [searchTransactions, setSearchTransactions] = useState<TransactionValues[]>([]);
+  const [] = useState(false);
 
   const money = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -79,11 +80,13 @@ export function Home() {
               ))}
           </tbody>
         </TransactionsTable>
-        {isLoading && transactions.length === 0 && (
+        {!searchTransactions.length && !isLoading && (
           <TransactionsTableEmpty>
             Adicione uma categoria e a sua primeira transação :)
           </TransactionsTableEmpty>
         )}
+
+        {isLoading && <TransactionsTableEmpty>Carregando...</TransactionsTableEmpty>}
       </TransactionsContainer>
     </HomeWrapper>
   );

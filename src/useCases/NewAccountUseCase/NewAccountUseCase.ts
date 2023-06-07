@@ -8,19 +8,13 @@ import {
   loadNewAccountFail,
 } from '../../stores/NewAccountStore/NewAccountEvents';
 
-const execute = async ({
-  name,
-  email,
-  password,
-  confirmPassword,
-}: NewAccountParams): Promise<void> => {
+const execute = async ({ name, email, password }: NewAccountParams): Promise<void> => {
   loadNewAccount();
 
   return NewAccountService.createUser({
     name,
     email,
     password,
-    confirmPassword,
   })
     .then(() => {
       loadNewAccountDone();

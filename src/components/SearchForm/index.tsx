@@ -21,7 +21,7 @@ export function SearchForm({ handleSearchForm }: SearchFormProps) {
   }
 
   useEffect(() => {
-    if (search === '') buttonSearchFormRef.current?.click();
+    if (search === '') handleSearchForm(search);
   }, [search]);
 
   return (

@@ -1,7 +1,7 @@
 {
   "uuid": "38a09fa7-5eda-4b4c-8ec5-990f3e52770d",
   "lastMigration": 27,
-  "name": "Mockoon environment",
+  "name": "levvaCoins",
   "endpointPrefix": "api",
   "latency": 750,
   "port": 3333,
@@ -10,7 +10,7 @@
     {
       "uuid": "6961b86e-892f-4180-91ba-4f1a0b98c946",
       "name": "Users",
-      "collapsed": false,
+      "collapsed": true,
       "children": [
         {
           "type": "route",
@@ -29,7 +29,7 @@
     {
       "uuid": "2405692c-3fc7-4662-8640-c05f453f4b0f",
       "name": "Categories",
-      "collapsed": true,
+      "collapsed": false,
       "children": [
         {
           "type": "route",

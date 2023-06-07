@@ -49,6 +49,7 @@ export const FormInput = styled.input`
 export const FormError = styled.span`
   color: ${props => props.theme['red-500']};
   margin: 0.5rem 0 1rem;
+  padding-left: 1rem;
 `;
 
 export const FormButton = styled.button`
