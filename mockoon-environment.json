@@ -10,7 +10,7 @@
     {
       "uuid": "6961b86e-892f-4180-91ba-4f1a0b98c946",
       "name": "Users",
-      "collapsed": true,
+      "collapsed": false,
       "children": [
         {
           "type": "route",
@@ -272,7 +272,7 @@
       "responses": [
         {
           "uuid": "ab307e97-2cbc-4b13-8c5b-43e67e4db4bf",
-          "body": "",
+          "body": "{\n  \"id\": \"{{guid}}\",\n  \"description\": \"Teste\"\n}",
           "latency": 0,
           "statusCode": 201,
           "label": "Category created",
