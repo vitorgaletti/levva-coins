@@ -272,7 +272,7 @@
       "responses": [
         {
           "uuid": "ab307e97-2cbc-4b13-8c5b-43e67e4db4bf",
-          "body": "{\n  \"id\": \"{{guid}}\",\n  \"description\": \"Teste\"\n}",
+          "body": "{\n  \"id\": \"{{guid}}\",\n  \"description\": \"Produtos de Limpeza\"\n}",
           "latency": 0,
           "statusCode": 201,
           "label": "Category created",
