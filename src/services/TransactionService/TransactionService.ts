@@ -8,7 +8,8 @@ const createTransaction = async ({
   amount,
   type,
   categoryId,
-}: NewTransactionParams): Promise<void> => {
+  userEmail,
+}: NewTransactionParams): Promise<TransactionValues> => {
   return Api.post({
     url: '/transaction',
     body: {
@@ -16,6 +17,7 @@ const createTransaction = async ({
       amount,
       type,
       categoryId,
+      userEmail,
     },
   })
     .then(response => {
@@ -28,7 +30,7 @@ const createTransaction = async ({
 
 const getTransactions = async (): Promise<TransactionValues[]> => {
   return Api.get({
-    url: '/transaction',
+    url: '/transaction/10/1',
   })
     .then(response => {
       return response.data;

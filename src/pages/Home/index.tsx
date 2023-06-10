@@ -27,7 +27,6 @@ export function Home() {
     style: 'currency',
     currency: 'BRL',
   });
-
   const handleSearch = useCallback(
     (search: string) => {
       const searchRegex = new RegExp(search, 'i');
@@ -75,7 +74,7 @@ export function Home() {
                     </PriceHighLight>
                   </td>
                   <td>{transaction.category.description}</td>
-                  <td>{transaction.createdAt}</td>
+                  <td>{new Date(transaction.createdAt).toLocaleDateString('pt-BR')}</td>
                 </tr>
               ))}
           </tbody>

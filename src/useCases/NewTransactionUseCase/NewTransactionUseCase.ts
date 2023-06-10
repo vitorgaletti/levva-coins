@@ -1,5 +1,5 @@
 import { RequestError } from '../../domains/request';
-import { NewTransactionParams } from '../../domains/transaction';
+import { NewTransactionParams, TransactionValues } from '../../domains/transaction';
 import { TransactionService } from '../../services/TransactionService/TransactionService';
 import {
   loadCreateTransactionDone,
@@ -12,6 +12,7 @@ const execute = async ({
   amount,
   type,
   categoryId,
+  userEmail,
 }: NewTransactionParams): Promise<void> => {
   loadTransaction();
 
@@ -20,9 +21,10 @@ const execute = async ({
     amount,
     type,
     categoryId,
+    userEmail,
   })
-    .then(() => {
-      loadCreateTransactionDone();
+    .then((data: TransactionValues) => {
+      loadCreateTransactionDone(data);
     })
     .catch(({ hasError, message }: RequestError) => {
       loadTransactionFail({ hasError, message });

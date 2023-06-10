@@ -20,12 +20,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import GetCategoriesUseCase from '../../useCases/GetCategoriesUseCase/GetCategoriesUseCase';
 import NewTransactionUseCases from '../../useCases/NewTransactionUseCase/NewTransactionUseCase';
 import { NewTransactionButton } from './styles';
+import { LoginValues } from '../../domains/login';
 
 interface FormProps {
   description: string;
   amount: number;
   type: string;
   categoryId: string;
+  userEmail: string;
 }
 
 const formSchema = yup
@@ -42,6 +44,7 @@ const formSchema = yup
 
 export function TransactionModal() {
   const closeModalRef = useRef<HTMLButtonElement>(null);
+  const storageUser = JSON.parse(window.localStorage.getItem('user') ?? '{}') as LoginValues;
 
   const { categories } = useStore(CategoryStore);
   const { isLoading, hasError, errorMessage } = useStore(TransactionStore);
@@ -61,12 +64,19 @@ export function TransactionModal() {
     GetCategoriesUseCase.execute();
   }, []);
 
-  async function handleCreateCategory({ description, amount, type, categoryId }: FormProps) {
+  async function handleCreateCategory({
+    description,
+    amount,
+    type,
+    categoryId,
+    userEmail = storageUser.email,
+  }: FormProps) {
     NewTransactionUseCases.execute({
       description,
       amount,
       type: type === 'income' ? 0 : 1,
       categoryId,
+      userEmail,
     })
       .then(() => closeModalRef.current?.click())
       .finally(() => reset());

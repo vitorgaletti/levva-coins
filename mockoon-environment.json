@@ -10,7 +10,7 @@
     {
       "uuid": "6961b86e-892f-4180-91ba-4f1a0b98c946",
       "name": "Users",
-      "collapsed": false,
+      "collapsed": true,
       "children": [
         {
           "type": "route",
@@ -44,7 +44,7 @@
     {
       "uuid": "c6dd1c5c-1a65-42fd-be16-0b75128f3c38",
       "name": "Transactions",
-      "collapsed": true,
+      "collapsed": false,
       "children": [
         {
           "type": "route",
@@ -417,7 +417,7 @@
       "responses": [
         {
           "uuid": "d891811c-c28f-4c07-929e-6c590eab43ee",
-          "body": "",
+          "body": "{\r\n    \"id\": \"{{guid}}\",\r\n    \"description\": \"{{faker 'commerce.productName'}}\",\r\n    \"amount\": {{toFixed (float 10.00 100.00) 2}},\r\n    \"type\": {{oneOf (array 0 1)}},\r\n    \"category\": {\r\n      \"id\": \"{{guid}}\",\r\n      \"description\": \"{{faker 'commerce.department'}}\"\r\n    },\r\n    \"createdAt\": \"{{now 'dd/MM/yyyy'}}\"\r\n  }",
           "latency": 0,
           "statusCode": 201,
           "label": "Transaction created",

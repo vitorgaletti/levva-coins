@@ -1,6 +1,10 @@
 import { createStore } from 'effector';
-import { loadCreateCategoryDone } from '../CategoryStore/CategoryEvents';
-import { loadTransaction, loadTransactionDone, loadTransactionFail } from './TransactionEvents';
+import {
+  loadCreateTransactionDone,
+  loadTransaction,
+  loadTransactionDone,
+  loadTransactionFail,
+} from './TransactionEvents';
 import { TransactionState } from './TransactionState';
 
 const initialState: TransactionState = {
@@ -17,11 +21,12 @@ const TransactionStore = createStore<TransactionState>(initialState)
     hasError: false,
     errorMessage: '',
   }))
-  .on(loadCreateCategoryDone, state => ({
+  .on(loadCreateTransactionDone, (state, data) => ({
     ...state,
     isLoading: false,
     hasError: false,
     errorMessage: '',
+    transactions: [data, ...state.transactions],
   }))
   .on(loadTransactionDone, (_, data) => ({
     isLoading: false,

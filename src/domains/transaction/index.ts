@@ -5,6 +5,7 @@ export interface NewTransactionParams {
   amount: number;
   type: number;
   categoryId: string;
+  userEmail: string;
 }
 
 export interface TransactionValues {
