@@ -28,9 +28,14 @@ const createTransaction = async ({
     });
 };
 
-const getTransactions = async (): Promise<TransactionValues[]> => {
+const getTransactions = async (search?: string): Promise<TransactionValues[]> => {
   return Api.get({
     url: '/transaction/10/1',
+    config: {
+      params: {
+        search: search,
+      },
+    },
   })
     .then(response => {
       return response.data;

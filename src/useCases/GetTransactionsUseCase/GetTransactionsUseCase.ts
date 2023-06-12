@@ -7,10 +7,10 @@ import {
   loadTransactionFail,
 } from '../../stores/TransactionStore/TransactionEvents';
 
-const execute = async (): Promise<void> => {
+const execute = async (search?: string): Promise<void> => {
   loadTransaction();
 
-  return TransactionService.getTransactions()
+  return TransactionService.getTransactions(search)
     .then((transactions: TransactionValues[]) => {
       loadTransactionDone(transactions);
     })

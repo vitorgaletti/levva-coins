@@ -20,31 +20,21 @@ import {
 export function Home() {
   const { isLoading, hasError, errorMessage, transactions } = useStore(TransactionStore);
 
-  const [searchTransactions, setSearchTransactions] = useState<TransactionValues[]>([]);
+  const [searchTransactions, setSearchTransactions] = useState('');
   const [] = useState(false);
 
   const money = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   });
-  const handleSearch = useCallback(
-    (search: string) => {
-      const searchRegex = new RegExp(search, 'i');
-      const searchResult = transactions.filter(transaction =>
-        searchRegex.test(transaction.description),
-      );
-      setSearchTransactions(searchResult);
-    },
-    [transactions],
-  );
+
+  function handleSearch(search: string) {
+    setSearchTransactions(search);
+  }
 
   useEffect(() => {
-    GetTransactionsUseCase.execute();
-  }, []);
-
-  useEffect(() => {
-    setSearchTransactions(transactions);
-  }, [transactions]);
+    GetTransactionsUseCase.execute(searchTransactions);
+  }, [searchTransactions]);
 
   return (
     <HomeWrapper>
@@ -64,8 +54,8 @@ export function Home() {
             </tr>
           </thead>
           <tbody>
-            {searchTransactions.length > 0 &&
-              searchTransactions.map(transaction => (
+            {transactions.length > 0 &&
+              transactions.map(transaction => (
                 <tr key={transaction.id}>
                   <td width="50%">{transaction.description}</td>
                   <td>
@@ -79,7 +69,7 @@ export function Home() {
               ))}
           </tbody>
         </TransactionsTable>
-        {!searchTransactions.length && !isLoading && (
+        {!transactions.length && !isLoading && (
           <TransactionsTableEmpty>
             Adicione uma categoria e a sua primeira transação :)
           </TransactionsTableEmpty>
