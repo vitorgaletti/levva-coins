@@ -1,6 +1,7 @@
 import { createStore } from 'effector';
 import {
   loadCreateTransactionDone,
+  loadDeleteTransactionDone,
   loadTransaction,
   loadTransactionDone,
   loadTransactionFail,
@@ -33,6 +34,13 @@ const TransactionStore = createStore<TransactionState>(initialState)
     transactions: data,
     hasError: false,
     errorMessage: '',
+  }))
+  .on(loadDeleteTransactionDone, (state, transactionId) => ({
+    ...state,
+    isLoading: false,
+    hasError: false,
+    errorMessage: '',
+    transactions: [...state.transactions.filter(transaction => transaction.id !== transactionId)],
   }))
   .on(loadTransactionFail, (state, data) => ({
     ...state,

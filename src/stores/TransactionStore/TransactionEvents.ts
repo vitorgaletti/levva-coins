@@ -7,4 +7,5 @@ export const loadCreateTransactionDone = createEvent<TransactionValues>(
   'loadCreateTransactionDone',
 );
 export const loadTransactionDone = createEvent<TransactionValues[]>('loadTransactionDone');
+export const loadDeleteTransactionDone = createEvent<id<string>>('loadCreateTransactionDone');
 export const loadTransactionFail = createEvent<RequestError>('loadTransactionFail');

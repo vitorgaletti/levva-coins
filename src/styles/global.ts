@@ -24,6 +24,16 @@ export const GlobalStyle = createGlobalStyle`
     font: 400 1rem 'Roboto', sans-serif;
   }
 
+  :disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  :disabled:hover{
+    background-color: inherit;
+    color: inherit;
+  }
+
 `;
 
 export const Form = styled.form`

@@ -1,7 +1,6 @@
 import { useStore } from 'effector-react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { TransactionValues } from '../../domains/transaction';
 import GetTransactionsUseCase from '../../useCases/GetTransactionsUseCase/GetTransactionsUseCase';
 import TransactionStore from '../../stores/TransactionStore/TransactionStore';
 
@@ -16,6 +15,7 @@ import {
   TransactionsTable,
   TransactionsTableEmpty,
 } from './styles';
+import { TransactionActionModal } from '../../components/TransactionActionModal';
 
 export function Home() {
   const { isLoading, hasError, errorMessage, transactions } = useStore(TransactionStore);
@@ -51,6 +51,7 @@ export function Home() {
               <th>Preço</th>
               <th>Categoria</th>
               <th>Data</th>
+              <th>Ação</th>
             </tr>
           </thead>
           <tbody>
@@ -65,6 +66,9 @@ export function Home() {
                   </td>
                   <td>{transaction.category.description}</td>
                   <td>{new Date(transaction.createdAt).toLocaleDateString('pt-BR')}</td>
+                  <td>
+                    <TransactionActionModal id={transaction.id} />
+                  </td>
                 </tr>
               ))}
           </tbody>

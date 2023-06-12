@@ -29,7 +29,7 @@
     {
       "uuid": "2405692c-3fc7-4662-8640-c05f453f4b0f",
       "name": "Categories",
-      "collapsed": false,
+      "collapsed": true,
       "children": [
         {
           "type": "route",
@@ -53,6 +53,10 @@
         {
           "type": "route",
           "uuid": "7eb15cec-51cb-4c6f-8318-abde33e778f0"
+        },
+        {
+          "type": "route",
+          "uuid": "2f4c71c0-1f5d-4105-bf1b-29d8ab5d4432"
         }
       ]
     }
@@ -555,6 +559,34 @@
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "2f4c71c0-1f5d-4105-bf1b-29d8ab5d4432",
+      "type": "http",
+      "documentation": "Remove a Transaction",
+      "method": "delete",
+      "endpoint": "transaction/:id",
+      "responses": [
+        {
+          "uuid": "df083909-1f5c-4982-ad4d-449508558416",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Delete a transaction",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
         }
       ],
       "enabled": true,
