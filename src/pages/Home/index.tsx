@@ -23,7 +23,7 @@ export function Home() {
     useStore(TransactionStore);
 
   const [searchTransactions, setSearchTransactions] = useState('');
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const money = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -31,6 +31,7 @@ export function Home() {
   });
 
   function handleSearch(search: string) {
+    setPageNumber(1);
     setSearchTransactions(search);
   }
 
@@ -38,9 +39,17 @@ export function Home() {
     setPageNumber(page);
   }
 
+  function getTransactions(reset: boolean = false) {
+    GetTransactionsUseCase.execute(searchTransactions.trim(), reset ? 1 : pageNumber);
+  }
+
   useEffect(() => {
-    GetTransactionsUseCase.execute(searchTransactions, pageNumber);
-  }, [searchTransactions, pageNumber, transactions.length]);
+    getTransactions();
+  }, [pageNumber, transactions.length]);
+
+  useEffect(() => {
+    getTransactions(true);
+  }, [searchTransactions]);
 
   return (
     <HomeWrapper>
@@ -88,7 +97,7 @@ export function Home() {
         {isLoading && <TransactionsTableEmpty>Carregando...</TransactionsTableEmpty>}
       </TransactionsContainer>
 
-      <Pagination totalPages={totalPages} handlePage={handlePagination} />
+      <Pagination totalPages={totalPages} handlePage={handlePagination} pageSelect={pageNumber} />
     </HomeWrapper>
   );
 }

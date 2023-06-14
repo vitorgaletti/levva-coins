@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CaretLeft, CaretRight } from 'phosphor-react';
 import { PaginationContainer, PrevNextButton, PageNumberButtonsContainer } from './styles';
 
 interface PaginationProps {
+  pageSelect: number;
   totalPages: number;
   handlePage: (page: number) => void;
 }
 
-export function Pagination({ totalPages, handlePage }: PaginationProps) {
-  const [pageNumber, setPageNumber] = useState(1);
+export function Pagination({ pageSelect, totalPages, handlePage }: PaginationProps) {
+  const [pageNumber, setPageNumber] = useState(pageSelect);
+
+  useEffect(() => {
+    setPageNumber(pageSelect);
+  }, [pageSelect]);
 
   function handlePrevPage() {
     if (pageNumber > 0) {

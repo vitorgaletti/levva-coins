@@ -36,7 +36,11 @@ const getTransactions = async (
     url: `/transaction/4/${numberPage}`,
     config: {
       params: {
-        search: search,
+        ...(search
+          ? {
+              search,
+            }
+          : {}),
       },
     },
   })
