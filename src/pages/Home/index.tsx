@@ -40,7 +40,7 @@ export function Home() {
 
   useEffect(() => {
     GetTransactionsUseCase.execute(searchTransactions, pageNumber);
-  }, [searchTransactions, pageNumber]);
+  }, [searchTransactions, pageNumber, transactions.length]);
 
   return (
     <HomeWrapper>
