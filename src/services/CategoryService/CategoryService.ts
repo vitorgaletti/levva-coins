@@ -11,7 +11,7 @@ const createCategory = async ({ description }: NewCategoryParams): Promise<Categ
     },
   })
     .then(response => {
-      return response.data;
+      return response.data.data;
     })
     .catch((err: AxiosError<RequestError>) => {
       throw err.response?.data;

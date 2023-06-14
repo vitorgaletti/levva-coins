@@ -30,8 +30,8 @@ const CategoryStore = createStore<CategoryState>(initialState)
   }))
   .on(loadCategoryDone, (_, data) => ({
     isLoading: false,
-    categories: data,
     hasError: false,
+    categories: data,
     errorMessage: '',
   }))
   .on(loadCategoryFail, (state, data) => ({

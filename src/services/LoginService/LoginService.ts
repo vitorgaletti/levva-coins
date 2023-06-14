@@ -13,7 +13,7 @@ const authenticateUser = async ({ email, password }: LoginParams): Promise<Login
     },
   })
     .then(response => {
-      return response.data;
+      return response.data.data;
     })
     .catch((err: AxiosError<RequestError>) => {
       throw err.response?.data;

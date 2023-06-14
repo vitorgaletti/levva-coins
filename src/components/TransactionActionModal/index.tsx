@@ -22,7 +22,7 @@ export function TransactionActionModal({ id }: TransactionActionModalProps) {
   async function handleDeleteTransaction() {
     await RemoveTransactionUseCase.execute(id);
   }
-  console.log(isLoading);
+
   return (
     <Modal
       title="Confirme a exclusão"

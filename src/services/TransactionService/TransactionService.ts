@@ -21,7 +21,7 @@ const createTransaction = async ({
     },
   })
     .then(response => {
-      return response.data;
+      return response.data.data;
     })
     .catch((err: AxiosError<RequestError>) => {
       return err.response?.data;
