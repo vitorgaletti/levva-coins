@@ -5,4 +5,5 @@ export interface TransactionState {
   transactions: TransactionValues[];
   hasError: boolean;
   errorMessage: string;
+  totalPages: number;
 }

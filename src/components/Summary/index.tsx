@@ -5,8 +5,7 @@ import { useStore } from 'effector-react';
 import TransactionStore from '../../stores/TransactionStore/TransactionStore';
 
 export function Summary() {
-  const { transactions } = useStore(TransactionStore);
-
+  const { transactions, totalPages } = useStore(TransactionStore);
   const summary = transactions.reduce(
     (acc, transaction) => {
       if (transaction.type === 0) {

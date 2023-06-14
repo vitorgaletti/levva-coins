@@ -2,6 +2,7 @@ import { createStore } from 'effector';
 import {
   loadCreateTransactionDone,
   loadDeleteTransactionDone,
+  loadTotalPageTransactionDone,
   loadTransaction,
   loadTransactionDone,
   loadTransactionFail,
@@ -13,6 +14,7 @@ const initialState: TransactionState = {
   transactions: [],
   hasError: false,
   errorMessage: '',
+  totalPages: 0,
 };
 
 const TransactionStore = createStore<TransactionState>(initialState)
@@ -21,6 +23,7 @@ const TransactionStore = createStore<TransactionState>(initialState)
     isLoading: true,
     hasError: false,
     errorMessage: '',
+    totalPages: 0,
   }))
   .on(loadCreateTransactionDone, (state, data) => ({
     ...state,
@@ -28,12 +31,18 @@ const TransactionStore = createStore<TransactionState>(initialState)
     hasError: false,
     errorMessage: '',
     transactions: [data, ...state.transactions],
+    totalPages: 0,
   }))
   .on(loadTransactionDone, (_, data) => ({
     isLoading: false,
     transactions: data,
     hasError: false,
     errorMessage: '',
+    totalPages: 0,
+  }))
+  .on(loadTotalPageTransactionDone, (state, number) => ({
+    ...state,
+    totalPages: number,
   }))
   .on(loadDeleteTransactionDone, (state, transactionId) => ({
     ...state,

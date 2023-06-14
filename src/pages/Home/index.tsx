@@ -16,12 +16,14 @@ import {
   TransactionsTableEmpty,
 } from './styles';
 import { TransactionActionModal } from '../../components/TransactionActionModal';
+import { Pagination } from '../../components/Pagination';
 
 export function Home() {
-  const { isLoading, hasError, errorMessage, transactions } = useStore(TransactionStore);
+  const { isLoading, hasError, errorMessage, transactions, totalPages } =
+    useStore(TransactionStore);
 
   const [searchTransactions, setSearchTransactions] = useState('');
-  const [] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
 
   const money = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -32,9 +34,13 @@ export function Home() {
     setSearchTransactions(search);
   }
 
+  function handlePagination(page: number) {
+    setPageNumber(page);
+  }
+
   useEffect(() => {
-    GetTransactionsUseCase.execute(searchTransactions);
-  }, [searchTransactions]);
+    GetTransactionsUseCase.execute(searchTransactions, pageNumber);
+  }, [searchTransactions, pageNumber]);
 
   return (
     <HomeWrapper>
@@ -81,6 +87,8 @@ export function Home() {
 
         {isLoading && <TransactionsTableEmpty>Carregando...</TransactionsTableEmpty>}
       </TransactionsContainer>
+
+      <Pagination totalPages={totalPages} handlePage={handlePagination} />
     </HomeWrapper>
   );
 }
