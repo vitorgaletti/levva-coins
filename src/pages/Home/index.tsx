@@ -1,8 +1,8 @@
 import { useStore } from 'effector-react';
-import { useEffect, useState } from 'react';
 
-import GetTransactionsUseCase from '../../useCases/GetTransactionsUseCase/GetTransactionsUseCase';
 import TransactionStore from '../../stores/TransactionStore/TransactionStore';
+
+import { useGetTransactionData } from '../../hooks/useGetTransactionData';
 
 import { Header } from '../../components/Header';
 import { SearchForm } from '../../components/SearchForm';
@@ -17,46 +17,24 @@ import {
 } from './styles';
 import { TransactionActionModal } from '../../components/TransactionActionModal';
 import { Pagination } from '../../components/Pagination';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export function Home() {
-  const { isLoading, hasError, errorMessage, transactions, totalPages } =
-    useStore(TransactionStore);
+  const { isLoading, transactions } = useStore(TransactionStore);
 
-  const [searchTransactions, setSearchTransactions] = useState('');
-  const [pageNumber, setPageNumber] = useState(1);
+  const { handleSearch, handlePagination, pageNumber, totalPages } = useGetTransactionData();
 
   const money = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   });
 
-  function handleSearch(search: string) {
-    setPageNumber(1);
-    setSearchTransactions(search);
-  }
-
-  function handlePagination(page: number) {
-    setPageNumber(page);
-  }
-
-  function getTransactions(reset: boolean = false) {
-    GetTransactionsUseCase.execute(searchTransactions.trim(), reset ? 1 : pageNumber);
-  }
-
-  useEffect(() => {
-    getTransactions();
-  }, [pageNumber, transactions.length]);
-
-  useEffect(() => {
-    getTransactions(true);
-  }, [searchTransactions]);
-
   return (
     <HomeWrapper>
       <Header />
       <Summary />
 
-      <SearchForm handleSearchForm={handleSearch} />
+      <SearchForm handleSearch={handleSearch} />
 
       <TransactionsContainer>
         <TransactionsTable>
@@ -94,10 +72,20 @@ export function Home() {
           </TransactionsTableEmpty>
         )}
 
-        {isLoading && <TransactionsTableEmpty>Carregando...</TransactionsTableEmpty>}
+        {isLoading && (
+          <TransactionsTableEmpty>
+            <CircularProgress />
+          </TransactionsTableEmpty>
+        )}
       </TransactionsContainer>
 
-      <Pagination totalPages={totalPages} handlePage={handlePagination} pageSelect={pageNumber} />
+      {transactions.length > 0 && (
+        <Pagination
+          handlePagination={handlePagination}
+          pageNumber={pageNumber}
+          totalPages={totalPages}
+        />
+      )}
     </HomeWrapper>
   );
 }

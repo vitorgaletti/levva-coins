@@ -16,3 +16,20 @@ export interface TransactionValues {
   category: CategoryValues;
   createdAt: string;
 }
+
+export interface GetTransactionsParams {
+  search?: string;
+  pageNumber: number;
+}
+
+export interface RemoveTransactionsParams {
+  id: string;
+}
+
+export interface TransactionResponse {
+  transactions: TransactionValues[];
+  totalPages: number;
+  totalIncomes: number;
+  totalOutcomes: number;
+  totalBalance: number;
+}

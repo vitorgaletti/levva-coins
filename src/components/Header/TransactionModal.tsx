@@ -21,6 +21,7 @@ import GetCategoriesUseCase from '../../useCases/GetCategoriesUseCase/GetCategor
 import NewTransactionUseCases from '../../useCases/NewTransactionUseCase/NewTransactionUseCase';
 import { NewTransactionButton } from './styles';
 import { LoginValues } from '../../domains/login';
+import { useGetTransactionData } from '../../hooks/useGetTransactionData';
 
 interface FormProps {
   description: string;
@@ -49,6 +50,8 @@ export function TransactionModal() {
   const { categories } = useStore(CategoryStore);
   const { isLoading, hasError, errorMessage } = useStore(TransactionStore);
 
+  const { getTransactions, handlePagination } = useGetTransactionData();
+
   const {
     register,
     handleSubmit,
@@ -64,7 +67,7 @@ export function TransactionModal() {
     GetCategoriesUseCase.execute();
   }, []);
 
-  async function handleCreateCategory({
+  async function handleCreateTransaction({
     description,
     amount,
     type,
@@ -78,8 +81,14 @@ export function TransactionModal() {
       categoryId,
       userEmail,
     })
-      .then(() => closeModalRef.current?.click())
-      .finally(() => reset());
+      .then(() => {
+        getTransactions();
+        handlePagination({ pageNumber: 1 });
+        closeModalRef.current?.click();
+      })
+      .finally(() => {
+        reset();
+      });
   }
 
   return (
@@ -88,7 +97,7 @@ export function TransactionModal() {
       closeModalRef={closeModalRef}
       trigger={<NewTransactionButton>Nova transação</NewTransactionButton>}
     >
-      <Form onSubmit={handleSubmit(handleCreateCategory)}>
+      <Form onSubmit={handleSubmit(handleCreateTransaction)}>
         <FormInput {...register('description')} placeholder="Descrição" />
         {errors.description && <FormError>{errors.description.message}</FormError>}
 

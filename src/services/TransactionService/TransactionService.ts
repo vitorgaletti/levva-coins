@@ -1,7 +1,13 @@
 import { AxiosError } from 'axios';
 import Api from '../../clients/api/Api';
 import { RequestError } from '../../domains/request';
-import { NewTransactionParams, TransactionValues } from '../../domains/transaction';
+import {
+  GetTransactionsParams,
+  NewTransactionParams,
+  RemoveTransactionsParams,
+  TransactionResponse,
+  TransactionValues,
+} from '../../domains/transaction';
 
 const createTransaction = async ({
   description,
@@ -28,31 +34,38 @@ const createTransaction = async ({
     });
 };
 
-const getTransactions = async (
-  search?: string,
-  numberPage?: number,
-): Promise<{ transactions: TransactionValues[]; totalPages: number }> => {
+const getTransactions = async ({
+  search,
+  pageNumber,
+}: GetTransactionsParams): Promise<TransactionResponse> => {
+  const isSearch = {
+    ...(search ? { search } : {}),
+  };
+
   return Api.get({
-    url: `/transaction/4/${numberPage}`,
+    url: `/transaction/4/${pageNumber}`,
     config: {
       params: {
-        ...(search
-          ? {
-              search,
-            }
-          : {}),
+        ...isSearch,
       },
     },
   })
     .then(response => {
-      return { transactions: response.data.transactions, totalPages: response.data.totalPages };
+      const { transactions, totalPages, totalIncomes, totalOutcomes, totalBalance } = response.data;
+      return {
+        transactions,
+        totalPages,
+        totalIncomes,
+        totalOutcomes,
+        totalBalance,
+      };
     })
     .catch((err: AxiosError<RequestError>) => {
       throw err.response?.data;
     });
 };
 
-const removeTransaction = async (id: string): Promise<void> => {
+const removeTransaction = async ({ id }: RemoveTransactionsParams): Promise<void> => {
   return Api.delete({
     url: `/transaction/${id}`,
   })

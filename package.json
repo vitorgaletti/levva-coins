@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.0",
+    "@mui/material": "^5.13.6",
     "@radix-ui/react-dialog": "^1.0.3",
     "@radix-ui/react-radio-group": "^1.1.2",
     "axios": "^1.4.0",

@@ -42,7 +42,7 @@ export function NewAccount() {
   });
 
   function handleNewAccount({ name, email, password, confirmPassword }: FormProps) {
-    NewAccountUseCase.execute({ name, email, password, confirmPassword });
+    NewAccountUseCase.execute({ name, email, password });
   }
 
   return (

@@ -5,25 +5,7 @@ import { useStore } from 'effector-react';
 import TransactionStore from '../../stores/TransactionStore/TransactionStore';
 
 export function Summary() {
-  const { transactions, totalPages } = useStore(TransactionStore);
-  const summary = transactions.reduce(
-    (acc, transaction) => {
-      if (transaction.type === 0) {
-        acc.deposits += transaction.amount;
-        acc.total += transaction.amount;
-      } else {
-        acc.withdraws += transaction.amount;
-        acc.total -= transaction.amount;
-      }
-
-      return acc;
-    },
-    {
-      deposits: 0,
-      withdraws: 0,
-      total: 0,
-    },
-  );
+  const { totalIncomes, totalOutcomes, totalBalance } = useStore(TransactionStore);
 
   const money = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -37,8 +19,7 @@ export function Summary() {
           <span>Entradas</span>
           <ArrowCircleUp size={32} color={defaultTheme['yellow-500']} />
         </header>
-
-        <strong>{money.format(summary.deposits)}</strong>
+        <strong>{money.format(totalIncomes)}</strong>
       </SummaryCard>
       <SummaryCard>
         <header>
@@ -46,7 +27,7 @@ export function Summary() {
           <ArrowCircleDown size={32} color={defaultTheme['red-500']} />
         </header>
 
-        <strong>{money.format(summary.withdraws)}</strong>
+        <strong>{money.format(totalOutcomes)}</strong>
       </SummaryCard>
       <SummaryCard variant="balance">
         <header>
@@ -54,7 +35,7 @@ export function Summary() {
           <CurrencyDollar size={32} color={defaultTheme['yellow-500']} />
         </header>
 
-        <strong>{money.format(summary.total)}</strong>
+        <strong>{money.format(totalBalance)}</strong>
       </SummaryCard>
     </SummaryContainer>
   );

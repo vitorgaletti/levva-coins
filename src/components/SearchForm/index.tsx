@@ -1,40 +1,46 @@
 import { MagnifyingGlass } from 'phosphor-react';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
+import * as yup from 'yup';
 import { SearchFormContainer } from './styles';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { GetTransactionsParams } from '../../domains/transaction';
 
-interface SearchFormProps {
-  handleSearchForm: (searchForm: string) => void;
+interface FormProps {
+  search: string;
 }
 
-export function SearchForm({ handleSearchForm }: SearchFormProps) {
-  const [search, setSearch] = useState<string>('');
+const formSchema = yup
+  .object({
+    search: yup.string(),
+  })
+  .required();
 
-  const inputSearchFormRef = useRef<HTMLInputElement>(null);
-  const buttonSearchFormRef = useRef<HTMLButtonElement>(null);
+interface SearchFormProps {
+  handleSearch: ({ search, pageNumber }: GetTransactionsParams) => void;
+}
 
-  function handleSubmitSearchForm(event: FormEvent) {
-    event.preventDefault();
+export function SearchForm({ handleSearch }: SearchFormProps) {
+  const { register, handleSubmit, setFocus, watch } = useForm<FormProps>({
+    resolver: yupResolver(formSchema),
+  });
+  const search = watch('search');
+  const isSearchEmpty = search === '';
 
-    handleSearchForm(search);
-
-    inputSearchFormRef.current?.focus();
+  function handleSearchForm({ search }: FormProps) {
+    const formattedSearch = search.trim();
+    handleSearch({ search: formattedSearch, pageNumber: 1 });
+    setFocus('search');
   }
 
   useEffect(() => {
-    if (search === '') handleSearchForm(search);
-  }, [search]);
+    if (isSearchEmpty) handleSearch({ search, pageNumber: 1 });
+  }, [!search]);
 
   return (
-    <SearchFormContainer onSubmit={handleSubmitSearchForm}>
-      <input
-        type="text"
-        placeholder="Busque por transações"
-        value={search}
-        onChange={event => setSearch(event.target.value)}
-        ref={inputSearchFormRef}
-        autoFocus
-      />
-      <button type="submit" ref={buttonSearchFormRef}>
+    <SearchFormContainer onSubmit={handleSubmit(handleSearchForm)}>
+      <input type="text" {...register('search')} placeholder="Busque por transações" autoFocus />
+      <button type="submit">
         <MagnifyingGlass size={20} />
         Buscar
       </button>

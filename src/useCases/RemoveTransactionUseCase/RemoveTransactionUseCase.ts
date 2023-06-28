@@ -1,4 +1,5 @@
 import { RequestError } from '../../domains/request';
+import { RemoveTransactionsParams } from '../../domains/transaction';
 import { TransactionService } from '../../services/TransactionService/TransactionService';
 import {
   loadTransaction,
@@ -6,11 +7,11 @@ import {
   loadDeleteTransactionDone,
 } from '../../stores/TransactionStore/TransactionEvents';
 
-const execute = async (id: string): Promise<void> => {
+const execute = async ({ id }: RemoveTransactionsParams): Promise<void> => {
   loadTransaction();
-  return TransactionService.removeTransaction(id)
+  return TransactionService.removeTransaction({ id })
     .then(() => {
-      loadDeleteTransactionDone(id);
+      loadDeleteTransactionDone({ id });
     })
     .catch(({ hasError, message }: RequestError) => {
       loadTransactionFail({ hasError, message });
